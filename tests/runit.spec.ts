@@ -2,8 +2,10 @@ import { test, expect } from "@playwright/test";
 import { faker } from "@faker-js/faker";
 
 test("Успешная регистрация", async ({ page }) => {
+  const firstName = faker.name.firstName();
+  const nameNumber = faker.number.int({ min: 10, max: 100 });
   const testData = {
-    userName: "TestUser" + faker.number.int({ min: 10, max: 100 }),
+    userName: `${firstName}${nameNumber}`,
     password: "Pass1221",
     email: faker.internet.email(),
   };
