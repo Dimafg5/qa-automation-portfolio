@@ -1,12 +1,7 @@
 import { test, expect } from "@playwright/test";
 import { faker } from "@faker-js/faker";
 
-test("Проверка работоспособности фильтра", async ({ page }) => {
-  page.on('console', msg => {
-    if (msg.type() === 'warning' && msg.text().includes('Mixed Content')) {
-      return; // Игнорируем
-    }
-  });
+test("Проверка работи фиььтра", async ({ page }) => {
   await page.goto("https://automationexercise.com/");
   const consentButton = page.getByRole("button", { name: "Consent" });
 if (await consentButton.isVisible({ timeout: 5000 }).catch(() => false)) {
