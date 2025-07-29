@@ -2,7 +2,7 @@ import { test, expect } from "@playwright/test";
 import { faker } from "@faker-js/faker";
 
 test("Успешная регистрация", async ({ page }) => {
-  const firstName = faker.name.firstName();
+  const firstName = faker.person.firstName();
   const nameNumber = faker.number.int({ min: 10, max: 100 });
   const testData = {
     userName: `${firstName}${nameNumber}`,
@@ -23,5 +23,7 @@ test("Успешная регистрация", async ({ page }) => {
   await password.fill(testData.password);
   await email.fill(testData.email);
   await submitButton.click();
+  await page.waitForURL(new RegExp(`/u/${testData.userName}`), { timeout: 15000 });
+  await expect(page).toHaveURL(new RegExp(`/u/${testData.userName}`));
   await expect(page.locator("body")).toContainText(testData.userName);
 });
